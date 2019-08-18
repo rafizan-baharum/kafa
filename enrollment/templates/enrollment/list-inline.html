@@ -1,0 +1,22 @@
+ <div class='col-12 col-md-10 mb-3 mx-auto'>
+ <div class='card {% if not applicant.registered_date %} border border-warning text-dark {% endif %}'>
+    <div class='card-body'>
+        <h5 class='card-name'>{{ applicant.mykid_no }}</h5>
+        <p class='card-text'>
+            <small class='text-muted'>{{ applicant.registered_date }}</small>
+            {% if truncate %}
+                {{ applicant.name|linebreaks|truncatewords:30 }}
+            {% else %}
+                {{ applicant.name|linebreaks }}
+            {% endif %}
+        </p>
+
+        {% if not detail %}
+            {% if not applicant.registered_date %} Draft {% endif %}
+            <a href="{{ applicant.get_absolute_url }}">View</a>
+        
+        {% endif %}
+    </div>
+
+ </div>
+</div>

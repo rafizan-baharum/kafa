@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block main-content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="overview-wrap">
+                <h2 class="title-1">Applicant List</h2>
+                <button class="au-btn au-btn-icon au-btn--blue" onclick="addApplicant()">
+                    <i class="zmdi zmdi-plus"></i>Add
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 m-t-25">
+            <div class="table-responsive table--no-card m-b-40">
+                <table class="table table-borderless table-striped table-earning">
+                    <thead>
+                    <tr>
+                        <th>MYKID</th>
+                        <th>NAME</th>
+                        <th>REGISTERED</th>
+                    </tr>
+                    </thead>
+
+                    {% for applicant in applicants %}
+                        <tr class='clickable-row' data-href='{{ applicant.get_absolute_url }}'>
+                            <td>
+                                {{ applicant.mykid_no }}
+                            </td>
+                            <td>
+                                {{ applicant.name }}
+                            </td>
+                            <td>
+                                {{ applicant.registered_date }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block main-js %}
+    <script>
+        jQuery(document).ready(function ($) {
+            $(".clickable-row").click(function () {
+                window.location = $(this).data("href");
+            });
+        });
+
+        function addApplicant() {
+            window.location.assign('/registration/applicants/create');
+        }
+    </script>
+{% endblock %}
